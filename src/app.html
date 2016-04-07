@@ -3,7 +3,7 @@
         <div class="col-xs-12">
             <div class="row">
                 <div class="col-md-12">
-                    <h1>${stream}</h1>
+                    <h1>${title}</h1>
                 </div>
                 <div class="col-md-12 options form-inline">
                     <div class="form-group">
@@ -27,7 +27,10 @@
                     </div>
                 </div>
             </div>
-            <div class="reddit-posts">
+            <div class="loading-box margin-top" if.bind="isLoading">
+                <img class="loading-box__image" src="images/hex-loader2.gif" alt="loading">
+            </div>
+            <div class="reddit-posts" if.bind="!isLoading">
                 <div repeat.for="post of posts" class="row">
                     <article class="reddit-post col-xs-12">
                         <div class="col-sm-1">

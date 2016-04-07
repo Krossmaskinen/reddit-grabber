@@ -1,4 +1,5 @@
 export class App {
+    title;
     redditUrl = 'https://www.reddit.com';
     stream = '/r/gintama'
     posts = [];
@@ -9,6 +10,7 @@ export class App {
     noImage = 'images/no-image.gif';
     lightbox = new Lightbox();
     validStream = true;
+    isLoading = true;
 
     constructor() {
         moment.locale('sv');
@@ -16,6 +18,7 @@ export class App {
     }
     responseOKCallback(redditPosts) {
         this.setValidStream(true);
+        this.title = this.stream;
         this.posts = redditPosts.data.children.map( (post) => post.data );
         this.redditWrap = document.querySelector('.reddit-posts');
 
@@ -25,9 +28,11 @@ export class App {
         this.updateBeforeAndAfter(redditPosts);
 
         this.lightbox.load();
+        this.setLoading(false);
     }
     fetchError(error) {
         this.setValidStream(false);
+        this.setLoading(false);
         console.log(error);
     }
     updateBeforeAndAfter(response) {
@@ -47,6 +52,8 @@ export class App {
                 headers: headers
             },
             fetchUrl;
+
+        this.setLoading(true);
 
         if( options ) {
             data = this.extendObject({}, defaultData, options.data);
@@ -126,6 +133,12 @@ export class App {
             this.fetchRedditPosts(options);
         }
     }
+    setLoading(state) {
+        this.isLoading = state;
+    }
+    setValidStream(state) {
+        this.validStream = state;
+    }
     extendObject(out) {
         out = out || {};
 
@@ -142,8 +155,5 @@ export class App {
         }
 
         return out;
-    }
-    setValidStream(state) {
-        this.validStream = state;
     }
 }

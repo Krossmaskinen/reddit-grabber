@@ -214,3 +214,6 @@ body {
 .margin-top {
     margin-top: 20px;
 }
+.loading-box__image {
+    width: 100%;
+}
