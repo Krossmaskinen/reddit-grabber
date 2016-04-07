@@ -1,0 +1,27 @@
+{
+  "name": "reddit-grabber",
+  "description": "A custom reddit feed",
+  "main": "dist/main.js",
+  "authors": [
+    "Bill Kurtson <bill.kurtson@gmail.com>"
+  ],
+  "license": "CC0-1.0",
+  "keywords": [
+    "aurelia",
+    "kit",
+    "beginner",
+    "skeleton"
+  ],
+  "moduleType": [],
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jsonlylightbox": "^0.5.3"
+  }
+}

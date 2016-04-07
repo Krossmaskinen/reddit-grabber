@@ -1,0 +1,63 @@
+<template>
+    <div class="container main-container">
+        <div class="col-xs-12">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1>${stream}</h1>
+                </div>
+                <div class="col-md-12 options form-inline">
+                    <div class="form-group">
+                        <label for="number_of_posts">Antal poster:</label>
+                        <select class="form-control" name="number_of_posts" change.delegate="refreshRedditPosts()" value.bind="limit">
+                            <option value="5">5</option>
+                            <option value="10">10</option>
+                            <option value="25">25</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="stream">Stream:</label>
+                        <input class="form-control" type="text" name="stream" input.delegate="setValidStream(true)" value.bind="stream" change.delegate="fetchRedditPosts()">
+                    </div>
+                </div>
+            </div>
+            <div class="row margin-top" if.bind="!validStream">
+                <div class="col-md-12">
+                    <div class="error-message alert alert-warning">
+                        Inga poster hittades i ${stream} :(
+                    </div>
+                </div>
+            </div>
+            <div class="reddit-posts">
+                <div repeat.for="post of posts" class="row">
+                    <article class="reddit-post col-xs-12">
+                        <div class="col-sm-1">
+                            <div class="reddit-post__score text-xs-center"><strong>${post.score}</strong></div>
+                        </div>
+                        <div class="reddit-post_img-wrap col-sm-2">
+                            <a href="${post.thumbnailPreview}" target="_blank">
+                                <img src="${post.thumbnail}" alt="thumbnail" class="reddit-post__img-left">
+                            </a>
+                        </div>
+                        <div class="reddit-post__text col-sm-9">
+                            <div>
+                                <a href="${redditUrl}${post.permalink}">${post.title}</a>
+                            </div>
+                            <span>Inlagd ${post.formatted_created} av</span> <a href="${redditUrl}/user/${post.author}">${post.author}</a>
+                            <blockquote class="blockquote reddit-post__blockquote ${post.text_class}">
+                                <p class="reddit-post__paragraph">${post.selftext}</p>
+                            </blockquote>
+                            <div>
+                                <a href="${post.permalink}"><small>${post.num_comments} kommentarer</small></a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+
+            <div class="pagination">
+                <span class="btn btn-secondary" click.delegate="fetchPrevious()" if.bind="beforeId">Previous</span>
+                <span class="btn btn-primary" click.delegate="fetchNext()" if.bind="afterId">Next</span>
+            </div>
+        </div>
+    </div>
+</template>

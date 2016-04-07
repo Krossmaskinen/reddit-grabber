@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Aurelia</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+
+    <link rel="stylesheet" href="styles/bootstrap.min.css">
+    <link rel="stylesheet" href="bower_components/jsonlylightbox/css/lightbox.min.css">
+    <link rel="stylesheet" href="styles/styles.css">
+
+    <script src="src/moment.js"></script>
+    <script src="bower_components/jsonlylightbox/js/lightbox.min.js"></script>
+  </head>
+
+  <body aurelia-app class="body">
+    <script src="jspm_packages/system.js"></script>
+    <script src="config.js"></script>
+    <script>
+      SystemJS.import('aurelia-bootstrapper');
+    </script>
+
+    <script>
+        var firstObject = {
+                option1: "first value",
+                option2: "first value",
+                option3: 1
+            },
+            secondObject = {
+                option2: "second value",
+                option3: 2
+            };
+
+
+
+        function extend(out) {
+            out = out || {};
+
+            for (let i = 1; i < arguments.length; i++) {
+                if (!arguments[i]) {
+                    continue;
+                }
+
+                for (let key in arguments[i]) {
+                    if( arguments[i].hasOwnProperty(key) ) {
+                        out[key] = arguments[i][key];
+                    }
+                }
+            }
+
+            return out;
+        }
+    </script>
+  </body>
+</html>
